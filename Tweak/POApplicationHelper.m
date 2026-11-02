@@ -115,7 +115,9 @@ void POSetFrontMostBundleId(NSString *bundleId){
             SEL selector = NSSelectorFromString(selectorName);
             if ([controller respondsToSelector:selector]) {
                 @try {
-                    id app = [controller performSelector:selector];
+                    IMP imp = [controller methodForSelector:selector];
+                    id (*call)(id, SEL) = (id (*)(id, SEL))imp;
+                    id app = call(controller, selector);
                     if ([app respondsToSelector:@selector(bundleIdentifier)]) return [app bundleIdentifier];
                 } @catch (NSException *exception) {
                     POLog(@"frontMost %@ exception: %@", selectorName, exception);
