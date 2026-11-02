@@ -51,6 +51,13 @@
 + (instancetype)sharedInstance;
 - (FBScene *)sceneWithIdentifier:(NSString *)identifier;
 - (NSSet *)scenesPassingTest:(BOOL (^)(FBScene *scene))test;
+- (NSSet *)scenes;
+@end
+
+// SpringBoard's app launcher, used only as a last-resort fallback.
+@interface LSApplicationWorkspace : NSObject
++ (instancetype)defaultWorkspace;
+- (BOOL)openApplicationWithBundleID:(NSString *)bundleID;
 @end
 
 @interface UIApplication (PullOverPrivate)
