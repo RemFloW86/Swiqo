@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>title</key>
+	<string>PullOver Pro</string>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key><string>PSGroupCell</string>
+			<key>footerText</key><string>Changes apply right away, no respring needed.</string>
+		</dict>
+		<dict>
+			<key>cell</key><string>PSSwitchCell</string>
+			<key>default</key><true/>
+			<key>defaults</key><string>com.pulloverpro.ios26</string>
+			<key>key</key><string>enabled</string>
+			<key>label</key><string>Enabled</string>
+			<key>PostNotification</key><string>com.pulloverpro.ios26/changed</string>
+		</dict>
+
+		<dict>
+			<key>cell</key><string>PSGroupCell</string>
+			<key>label</key><string>QuickSwitch</string>
+			<key>footerText</key><string>Long-press the handle to open QuickSwitch. Pick an app to pin it, or drag it to the middle to open it full screen.</string>
+		</dict>
+		<dict>
+			<key>cell</key><string>PSSegmentCell</string>
+			<key>default</key><string>Recent Apps</string>
+			<key>defaults</key><string>com.pulloverpro.ios26</string>
+			<key>key</key><string>style</string>
+			<key>validTitles</key><array><string>Recent Apps</string><string>Favorites</string></array>
+			<key>validValues</key><array><string>Recent Apps</string><string>Favorites</string></array>
+			<key>PostNotification</key><string>com.pulloverpro.ios26/changed</string>
+		</dict>
+		<dict>
+			<key>cell</key><string>PSStaticTextCell</string>
+			<key>label</key><string>Number of Recent Apps</string>
+		</dict>
+		<dict>
+			<key>cell</key><string>PSSliderCell</string>
+			<key>default</key><integer>5</integer>
+			<key>defaults</key><string>com.pulloverpro.ios26</string>
+			<key>key</key><string>recentAppsCount</string>
+			<key>min</key><integer>1</integer>
+			<key>max</key><integer>10</integer>
+			<key>isSegmented</key><true/>
+			<key>segmentCount</key><integer>9</integer>
+			<key>showValue</key><true/>
+			<key>PostNotification</key><string>com.pulloverpro.ios26/changed</string>
+		</dict>
+		<dict>
+			<key>cell</key><string>PSLinkListCell</string>
+			<key>detail</key><string>ATLApplicationListMultiSelectionController</string>
+			<key>defaults</key><string>com.pulloverpro.ios26</string>
+			<key>key</key><string>favorites</string>
+			<key>label</key><string>Favorite Apps</string>
+			<key>sections</key>
+			<array>
+				<dict><key>sectionType</key><string>Visible</string></dict>
+			</array>
+			<key>useSearchBar</key><true/>
+			<key>alphabeticIndexingEnabled</key><true/>
+			<key>defaultApplicationSwitchValue</key><false/>
+			<key>PostNotification</key><string>com.pulloverpro.ios26/changed</string>
+		</dict>
+
+		<dict>
+			<key>cell</key><string>PSGroupCell</string>
+			<key>label</key><string>Appearance</string>
+		</dict>
+		<dict>
+			<key>cell</key><string>PSSwitchCell</string>
+			<key>default</key><false/>
+			<key>defaults</key><string>com.pulloverpro.ios26</string>
+			<key>key</key><string>leftHanded</string>
+			<key>label</key><string>Left-Handed Mode</string>
+			<key>PostNotification</key><string>com.pulloverpro.ios26/changed</string>
+		</dict>
+		<dict>
+			<key>cell</key><string>PSSwitchCell</string>
+			<key>default</key><false/>
+			<key>defaults</key><string>com.pulloverpro.ios26</string>
+			<key>key</key><string>darkHandle</string>
+			<key>label</key><string>Dark Handle</string>
+			<key>PostNotification</key><string>com.pulloverpro.ios26/changed</string>
+		</dict>
+		<dict>
+			<key>cell</key><string>PSSwitchCell</string>
+			<key>default</key><false/>
+			<key>defaults</key><string>com.pulloverpro.ios26</string>
+			<key>key</key><string>hideLabels</string>
+			<key>label</key><string>Hide QuickSwitch Labels</string>
+			<key>PostNotification</key><string>com.pulloverpro.ios26/changed</string>
+		</dict>
+		<dict>
+			<key>cell</key><string>PSStaticTextCell</string>
+			<key>label</key><string>QuickSwitch Size</string>
+		</dict>
+		<dict>
+			<key>cell</key><string>PSSliderCell</string>
+			<key>default</key><real>1.75</real>
+			<key>defaults</key><string>com.pulloverpro.ios26</string>
+			<key>key</key><string>quickswitchScale</string>
+			<key>min</key><real>1.0</real>
+			<key>max</key><real>2.5</real>
+			<key>showValue</key><true/>
+			<key>PostNotification</key><string>com.pulloverpro.ios26/changed</string>
+		</dict>
+
+		<dict>
+			<key>cell</key><string>PSGroupCell</string>
+			<key>label</key><string>Behavior</string>
+			<key>footerText</key><string>Close When Going Home: pressing Home or swiping up to the Home Screen also closes the app you pulled over.</string>
+		</dict>
+		<dict>
+			<key>cell</key><string>PSSwitchCell</string>
+			<key>default</key><true/>
+			<key>defaults</key><string>com.pulloverpro.ios26</string>
+			<key>key</key><string>closeOnHome</string>
+			<key>label</key><string>Close When Going Home</string>
+			<key>PostNotification</key><string>com.pulloverpro.ios26/changed</string>
+		</dict>
+		<dict>
+			<key>cell</key><string>PSSwitchCell</string>
+			<key>default</key><true/>
+			<key>defaults</key><string>com.pulloverpro.ios26</string>
+			<key>key</key><string>hideInLandscape</string>
+			<key>label</key><string>Hide in Landscape</string>
+			<key>PostNotification</key><string>com.pulloverpro.ios26/changed</string>
+		</dict>
+		<dict>
+			<key>cell</key><string>PSSwitchCell</string>
+			<key>default</key><true/>
+			<key>defaults</key><string>com.pulloverpro.ios26</string>
+			<key>key</key><string>hapticFeedback</string>
+			<key>label</key><string>Haptic Feedback</string>
+			<key>PostNotification</key><string>com.pulloverpro.ios26/changed</string>
+		</dict>
+		<dict>
+			<key>cell</key><string>PSSwitchCell</string>
+			<key>default</key><false/>
+			<key>defaults</key><string>com.pulloverpro.ios26</string>
+			<key>key</key><string>keyboardAvoiding</string>
+			<key>label</key><string>Move Handle Above Keyboard</string>
+			<key>PostNotification</key><string>com.pulloverpro.ios26/changed</string>
+		</dict>
+
+		<dict>
+			<key>cell</key><string>PSGroupCell</string>
+			<key>label</key><string>Auto-Nub</string>
+			<key>footerText</key><string>Shrinks the handle into a small nub at the edge after it has been idle.</string>
+		</dict>
+		<dict>
+			<key>cell</key><string>PSSwitchCell</string>
+			<key>default</key><false/>
+			<key>defaults</key><string>com.pulloverpro.ios26</string>
+			<key>key</key><string>autoNub</string>
+			<key>label</key><string>Auto-Nub When Idle</string>
+			<key>PostNotification</key><string>com.pulloverpro.ios26/changed</string>
+		</dict>
+		<dict>
+			<key>cell</key><string>PSStaticTextCell</string>
+			<key>label</key><string>Nub After (seconds)</string>
+		</dict>
+		<dict>
+			<key>cell</key><string>PSSliderCell</string>
+			<key>default</key><integer>5</integer>
+			<key>defaults</key><string>com.pulloverpro.ios26</string>
+			<key>key</key><string>autoNub-time</string>
+			<key>min</key><integer>1</integer>
+			<key>max</key><integer>30</integer>
+			<key>isSegmented</key><true/>
+			<key>segmentCount</key><integer>29</integer>
+			<key>showValue</key><true/>
+			<key>PostNotification</key><string>com.pulloverpro.ios26/changed</string>
+		</dict>
+
+		<dict>
+			<key>cell</key><string>PSGroupCell</string>
+			<key>label</key><string>Credits</string>
+			<key>footerText</key><string>PullOver Pro was made by c1d3r and released under the GPL-3.0 license. iOS 15 to 27 Rootless and RootHide support by Jond-ie.</string>
+		</dict>
+		<dict>
+			<key>cell</key><string>PSButtonCell</string>
+			<key>label</key><string>c1d3r (@c1d3rdev), original tweak</string>
+			<key>action</key><string>openURL:</string>
+			<key>url</key><string>https://x.com/c1d3rdev</string>
+		</dict>
+		<dict>
+			<key>cell</key><string>PSButtonCell</string>
+			<key>label</key><string>Original Source on GitHub</string>
+			<key>action</key><string>openURL:</string>
+			<key>url</key><string>https://github.com/c1d3rdev/PullOver-Pro</string>
+		</dict>
+		<dict>
+			<key>cell</key><string>PSButtonCell</string>
+			<key>label</key><string>@akusio_RR, iOS 13 support</string>
+			<key>action</key><string>openURL:</string>
+			<key>url</key><string>https://x.com/akusio_RR</string>
+		</dict>
+		<dict>
+			<key>cell</key><string>PSButtonCell</string>
+			<key>label</key><string>@Jond_ie, iOS 15–27 Rootless &amp; RootHide support</string>
+			<key>action</key><string>openURL:</string>
+			<key>url</key><string>https://x.com/Jond_ie</string>
+		</dict>
+	</array>
+</dict>
+</plist>
