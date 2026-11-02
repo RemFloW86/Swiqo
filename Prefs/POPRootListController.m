@@ -22,7 +22,7 @@
 
 - (NSArray *)specifiers {
     if (!_specifiers) {
-        NSArray *loaded = [self loadSpecifiersFromPlistName:@"Root" target:self];
+        NSMutableArray *loaded = [[self loadSpecifiersFromPlistName:@"Root" target:self] mutableCopy];
         // AltList is only a "Recommends" dependency. If it is missing, hide the
         // favorites picker instead of letting Preferences crash on an unknown
         // ATLApplicationListMultiSelectionController class.
