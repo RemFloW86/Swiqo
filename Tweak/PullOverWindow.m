@@ -37,6 +37,7 @@
         self.rootViewController = controller = [[PullOverViewController alloc] init];
         self.userInteractionEnabled = YES;
         self.backgroundColor = [UIColor clearColor];
+        POLog(@"window init bounds=%@ screens=%@", NSStringFromCGRect(self.bounds), [UIScreen mainScreen].bounds);
         [self attachToSceneIfNeeded];
     }
     return self;
@@ -107,6 +108,7 @@
         if ([aggregator respondsToSelector:@selector(lockState)]) {
             @try {
                 unsigned long long state = [aggregator lockState];
+                POLog(@"lockState aggregator -> %llu", state);
                 // iOS 15/16: 0 = unlocked, 1 = locked. Only trust these two
                 // explicit values so an unknown new state cannot make the
                 // handle permanently invisible.
@@ -118,6 +120,7 @@
         }
     }
 
+    POLog(@"lock sources: springboard=%d have=%d", springboardLocked, haveSpringboardValue);
     return haveSpringboardValue ? springboardLocked : NO;
 }
 

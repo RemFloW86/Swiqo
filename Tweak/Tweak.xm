@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <AudioToolbox/AudioToolbox.h>
 #import <objc/runtime.h>
+#import <unistd.h>
 
 #import "headers.h"
 #import "PullOverWindow.h"
@@ -214,11 +216,48 @@ static void POCommand(CFNotificationCenterRef center, void *observer, CFStringRe
 %end
 
 %ctor {
-    POLog(@"PullOverPro loaded (ctor)");
+    POLog(@"PullOverPro loaded (ctor) pid=%d", getpid());
     CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, POPrefsChanged,
                                     CFSTR(POPrefsChangedNotification), NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
     for (NSString *name in @[@POOpenNotification, @POCloseNotification, @POToggleNotification]) {
         CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, POCommand,
                                         (__bridge CFStringRef)name, NULL, CFNotificationSuspensionBehaviorDeliverImmediately);
     }
+
+#if DEBUG
+    // Diagnostic beacon: a double vibration ~1.5 s after the dylib loads proves
+    // the injection worked even when SpringBoard's sandbox blocks the log file.
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        });
+    });
+
+    // Force the window up once SpringBoard has a scene, whether or not the
+    // applicationDidFinishLaunching: / home screen hooks fired.
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [POApplicationHelper reloadSettings];
+        BOOL enabled = [[POApplicationHelper settings][@"enabled"] boolValue];
+        UIApplication *app = [UIApplication sharedApplication];
+        POLog(@"DIAG scenes=%lu enabled=%d homeClass=%d", (unsigned long)app.connectedScenes.count, enabled,
+              NSClassFromString(@"SBHomeScreenViewController") != nil);
+        if (!enabled) return;
+
+        if (!window) window = [PullOverWindow sharedWindow];
+        [window attachToSceneIfNeeded];
+        [window makeKeyAndVisible];
+        [window updateVisibilityForLockState];
+        [window.controller.view setNeedsLayout];
+        [window.controller.view layoutIfNeeded];
+
+        POLog(@"DIAG window=%@ scene=%@ level=%f alpha=%f hidden=%d bounds=%@",
+              window, window.windowScene, window.windowLevel, window.alpha, window.hidden,
+              NSStringFromCGRect(window.bounds));
+        POLog(@"DIAG controller=%@ handle=%@ frame=%@ hidden=%d alpha=%f",
+              window.controller, window.controller.handle,
+              NSStringFromCGRect(window.controller.handle.frame),
+              window.controller.handle.hidden, window.controller.handle.alpha);
+    });
+#endif
 }
