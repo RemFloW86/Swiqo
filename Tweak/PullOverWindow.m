@@ -37,7 +37,7 @@
         self.rootViewController = controller = [[PullOverViewController alloc] init];
         self.userInteractionEnabled = YES;
         self.backgroundColor = [UIColor clearColor];
-        POLog(@"window init bounds=%@ screens=%@", NSStringFromCGRect(self.bounds), [UIScreen mainScreen].bounds);
+        POLog(@"window init bounds=%@ screens=%@", NSStringFromCGRect(self.bounds), NSStringFromCGRect([UIScreen mainScreen].bounds));
         [self attachToSceneIfNeeded];
     }
     return self;
